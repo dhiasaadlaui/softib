@@ -5,4 +5,4 @@
  * @author Dhia
  *
  */
-package com.softib.dao;
+package com.softib.controllers;

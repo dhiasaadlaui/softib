@@ -5,4 +5,4 @@
  * @author Dhia
  *
  */
-package com.softib.models;
+package com.softib.repositories;
