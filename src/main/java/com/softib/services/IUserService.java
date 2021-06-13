@@ -7,6 +7,9 @@ import com.softib.entities.User;
 
 
 public interface IUserService {
-	public User authenticate(String email, String password) ;
+	
+	public User getCurrentUser();
+	public User findUserByEmail(String email) ;
 	public List<User> getAllUsers() ;
+
 }

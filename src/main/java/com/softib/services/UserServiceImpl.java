@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.softib.entities.User;
@@ -19,9 +21,9 @@ public class UserServiceImpl implements IUserService {
 	UserRepository userRepository;
 	
 	@Override
-	public User authenticate(String email, String password) {
+	public User findUserByEmail(String email) {
 		// TODO Auto-generated method stub
-		User user = userRepository.getSalaireByEmployeIdJPQL(email);
+		User user = userRepository.findUserByEmail(email);
 		return user;
 	}
 
@@ -32,6 +34,18 @@ public class UserServiceImpl implements IUserService {
 		Iterable<User> users  = userRepository.findAll();
 		users.forEach(result::add);
 		return result;
+	}
+
+	@Override
+	public User getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String email = null;
+		if (principal instanceof UserDetails) {
+			email = ((UserDetails)principal).getUsername();
+		} else {
+			email = principal.toString();
+		}
+		return findUserByEmail(email);
 	}
 
 }
