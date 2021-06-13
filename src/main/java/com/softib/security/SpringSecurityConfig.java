@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -35,11 +36,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-        .antMatchers("/api/rest/auth","/api/rest/v2/api-docs",
-        			"/api/rest//configuration/**","/api/rest/swagger*/**",
+        .antMatchers("/api/rest/auth",
+        			"/api/rest/register",
+        			"/api/rest/v2/api-docs",
+        			"/api/rest//configuration/**",
+        			"/api/rest/swagger*/**",
         			"/api/rest/swagger-resources/**",
         			"/api/rest/configuration/security",
-        			"/api/rest/swagger-ui.html","/api/rest/webjars/**").permitAll()
+        			"/api/rest/swagger-ui.html",
+        			"/api/rest/webjars/**").permitAll()
         .and().authorizeRequests().antMatchers("/api/rest/users").hasAnyAuthority("ADMIN")
         .anyRequest().authenticated()
         .and().sessionManagement()
@@ -55,6 +60,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return NoOpPasswordEncoder.getInstance();
+    	return new BCryptPasswordEncoder();
     }
 }

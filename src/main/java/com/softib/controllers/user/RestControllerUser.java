@@ -61,5 +61,10 @@ public class RestControllerUser {
 		return new AuthentificationResponse(jwt);
 	}
 	
+	@PostMapping(value = "register")
+	@ResponseBody
+	public User register(@RequestBody User user) {
+		return userService.registerNewUserAccount(user);
+	}
 	
 }

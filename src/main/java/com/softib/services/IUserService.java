@@ -11,5 +11,6 @@ public interface IUserService {
 	public User getCurrentUser();
 	public User findUserByEmail(String email) ;
 	public List<User> getAllUsers() ;
+	public User registerNewUserAccount(User user);
 
 }

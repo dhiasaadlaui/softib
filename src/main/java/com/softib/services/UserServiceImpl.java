@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.softib.entities.User;
 import com.softib.entities.codes.Role;
 import com.softib.repositories.UserRepository;
+import com.softib.util.Utility;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -19,6 +21,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@Override
 	public User findUserByEmail(String email) {
@@ -46,6 +51,15 @@ public class UserServiceImpl implements IUserService {
 			email = principal.toString();
 		}
 		return findUserByEmail(email);
+	}
+
+	@Override
+	public User registerNewUserAccount(User userDto) {
+		User user = userDto;
+		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		user.setIsActive(false);
+		user.setActivationKey(Utility.generateActivationKey());
+		return userRepository.save(user);
 	}
 
 }
