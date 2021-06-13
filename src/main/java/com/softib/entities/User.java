@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.softib.entities.codes.IdentityType;
 import com.softib.entities.codes.MaritalStatus;
 import com.softib.entities.codes.Nationality;
@@ -34,7 +35,7 @@ public class User implements Serializable{
 	
 	@Column(unique=true)
 	private String email;
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -53,7 +54,7 @@ public class User implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private Boolean isActive;
-	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String activationKey;
 	
 	

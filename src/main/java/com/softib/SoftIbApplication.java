@@ -3,13 +3,20 @@ package com.softib;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.softib.entities.User;
+import com.softib.entities.codes.Role;
+import com.softib.services.UserServiceImpl;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -33,6 +40,20 @@ public class SoftIbApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SoftIbApplication.class, args);
 	}
+	
+	 @Bean
+	 ApplicationRunner init(UserServiceImpl userService) {
+	        return args -> {
+	            Stream.of(Role.values()).forEach(role -> {
+	                User user = new User();
+	                user.setEmail(role.toString().toLowerCase()+"@gmail.com");
+	                user.setPassword(role.toString().toLowerCase());
+	                user.setRole(role);
+	                userService.registerNewUserAccount(user);
+	            });
+	           
+	        };
+	    }
 	
 	@Bean
 	public Docket swaggerConfiguration() {
