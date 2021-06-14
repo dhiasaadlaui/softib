@@ -1,4 +1,4 @@
-package com.softib.security;
+package com.softib.core.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

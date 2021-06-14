@@ -1,17 +1,21 @@
 version: "3.7"
 services:
-  soft-ib-users:
-    image: soft-ib-users:1.0
+  soft-ib-core:
+    image: soft-ib-core:1.0
     ports:
       - 8085:8081
     depends_on:
-      - mysql_db_soft-ib_users
-  mysql_db_soft-ib_users:
+      db_core:
+        condition: service_healthy
+  db_core:
     image: "mysql:5.7"
     restart: always
     ports:
-      - 3310:3306
+      - 3306:3306
     environment:
-      MYSQL_DATABASE: softibusers
+      MYSQL_DATABASE: core
       MYSQL_ROOT_PASSWORD: root
-      
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10      

@@ -1,11 +1,11 @@
-package com.softib.repositories;
+package com.softib.core.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.softib.entities.User;
+import com.softib.core.entities.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {

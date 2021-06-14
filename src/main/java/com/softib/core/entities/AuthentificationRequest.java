@@ -1,4 +1,4 @@
-package com.softib.entities;
+package com.softib.core.entities;
 
 public class AuthentificationRequest {
 

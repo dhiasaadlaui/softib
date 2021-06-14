@@ -1,9 +1,9 @@
-package com.softib.services;
+package com.softib.core.services;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.softib.entities.User;
+import com.softib.core.entities.User;
 
 
 public interface IUserService {

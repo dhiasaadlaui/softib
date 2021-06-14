@@ -1,4 +1,4 @@
-package com.softib.controllers.user;
+package com.softib.core.controllers.user;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.softib.entities.AuthentificationRequest;
-import com.softib.entities.AuthentificationResponse;
-import com.softib.entities.User;
-import com.softib.security.MyUserDetailsService;
-import com.softib.services.IUserService;
-import com.softib.util.JwtUtil;
+import com.softib.core.entities.AuthentificationRequest;
+import com.softib.core.entities.AuthentificationResponse;
+import com.softib.core.entities.User;
+import com.softib.core.security.MyUserDetailsService;
+import com.softib.core.services.IUserService;
+import com.softib.core.util.JwtUtil;
 
 @RestController
 public class RestControllerUser {

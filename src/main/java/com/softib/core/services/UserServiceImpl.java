@@ -1,4 +1,4 @@
-package com.softib.services;
+package com.softib.core.services;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.softib.entities.User;
-import com.softib.entities.codes.Role;
-import com.softib.repositories.UserRepository;
-import com.softib.util.Utility;
+import com.softib.core.entities.User;
+import com.softib.core.entities.codes.Role;
+import com.softib.core.repositories.UserRepository;
+import com.softib.core.util.Utility;
 
 @Service
 public class UserServiceImpl implements IUserService {

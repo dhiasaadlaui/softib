@@ -1,4 +1,4 @@
-package com.softib;
+package com.softib.core;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.softib.entities.User;
-import com.softib.entities.codes.Role;
-import com.softib.services.UserServiceImpl;
+import com.softib.core.entities.User;
+import com.softib.core.entities.codes.Role;
+import com.softib.core.services.UserServiceImpl;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -32,9 +32,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-@EnableAutoConfiguration
-@EnableJpaRepositories(basePackages = "com.softib")
-@EntityScan(basePackages = "com.softib.entities")
 public class SoftIbApplication {
 
 	public static void main(String[] args) {
@@ -63,7 +60,7 @@ public class SoftIbApplication {
 			      .securitySchemes(Arrays.asList(apiKey()))
 				.select()
 				.paths(PathSelectors.ant("/**"))
-				.apis(RequestHandlerSelectors.basePackage("com.softib"))
+				.apis(RequestHandlerSelectors.basePackage("com.softib.core"))
 			
 				.build();
 	}
@@ -84,7 +81,7 @@ public class SoftIbApplication {
 	private ApiInfo apiInfo() {
 	    return new ApiInfo(
 	      "REST API",
-	      "Soft IB API.",
+	      "Soft IB Core API.",
 	      "1.0",
 	      "Terms of service",
 	      new Contact("Dhia saadlaui", "https://github.com/dhiasaadlaui/softib", "dhiasaadlaui@gmail.com"),

@@ -1,4 +1,4 @@
-package com.softib.security;
+package com.softib.core.security;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.softib.util.JwtUtil;
+import com.softib.core.util.JwtUtil;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

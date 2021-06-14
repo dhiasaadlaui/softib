@@ -1,4 +1,4 @@
-package com.softib.util;
+package com.softib.core.util;
 
 import java.util.Random;
 

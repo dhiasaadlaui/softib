@@ -1,4 +1,4 @@
-package com.softib.entities;
+package com.softib.core.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.softib.entities.codes.ContactType;
+import com.softib.core.entities.codes.ContactType;
 
 
 @Entity

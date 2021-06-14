@@ -9,12 +9,12 @@
 		<version>2.5.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.softib</groupId>
-	<artifactId>soft-ib</artifactId>
+	<groupId>com.softib-core</groupId>
+	<artifactId>soft-ib-core</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>soft-ib</name>
-	<description>Application de Gestion Bancaire (Soft IB)</description>
+	<description>Microservice core Soft IB</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

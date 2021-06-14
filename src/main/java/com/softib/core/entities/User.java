@@ -1,4 +1,4 @@
-package com.softib.entities;
+package com.softib.core.entities;
 
 import java.io.Serializable;
 
@@ -17,11 +17,11 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.softib.entities.codes.IdentityType;
-import com.softib.entities.codes.MaritalStatus;
-import com.softib.entities.codes.Nationality;
-import com.softib.entities.codes.Role;
-import com.softib.entities.codes.Sexe;
+import com.softib.core.entities.codes.IdentityType;
+import com.softib.core.entities.codes.MaritalStatus;
+import com.softib.core.entities.codes.Nationality;
+import com.softib.core.entities.codes.Role;
+import com.softib.core.entities.codes.Sexe;
 
 @Entity
 public class User implements Serializable{
