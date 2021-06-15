@@ -35,6 +35,8 @@ public class User implements Serializable{
 	
 	@Column(unique=true)
 	private String email;
+	@Column(unique=true)
+	private String username;
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 	private String firstName;
@@ -116,24 +118,23 @@ public class User implements Serializable{
 
 
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ "]";
-	}
 
 
 
 
 
 
-	public User(int userId, String email, String password, String firstName, String lastName, Date dateOfBirth,
-			String identityNumber, IdentityType identityType, Date creationDate, Date updateDate, Sexe sexe,
-			MaritalStatus maritalStatus, Nationality nationality, Role role, Boolean isActive, String activationKey,
-			List<Adress> adresses, List<Contact> contacts) {
+
+
+
+	public User(int userId, String email, String username, String password, String firstName, String lastName,
+			Date dateOfBirth, String identityNumber, IdentityType identityType, Date creationDate, Date updateDate,
+			Sexe sexe, MaritalStatus maritalStatus, Nationality nationality, Role role, Boolean isActive,
+			String activationKey, List<Adress> adresses, List<Contact> contacts) {
 		super();
 		this.userId = userId;
 		this.email = email;
+		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -150,6 +151,20 @@ public class User implements Serializable{
 		this.activationKey = activationKey;
 		this.adresses = adresses;
 		this.contacts = contacts;
+	}
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

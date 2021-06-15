@@ -51,12 +51,12 @@ public class RestControllerUser {
 	public AuthentificationResponse login(@RequestBody AuthentificationRequest authentificationRequest) throws Exception {
 		try {
 			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(authentificationRequest.getEmail(), authentificationRequest.getPassword())
+					new UsernamePasswordAuthenticationToken(authentificationRequest.getUsername(), authentificationRequest.getPassword())
 					);
 		} catch (BadCredentialsException e) {
 			throw new  Exception("incorrect username and password",e);
 		}
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authentificationRequest.getEmail());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authentificationRequest.getUsername());
 		final String jwt = jwtTokenUtil.generateToken(userDetails);
 		return new AuthentificationResponse(jwt);
 	}

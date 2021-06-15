@@ -1,2 +1,2 @@
-# softib-core
+# softib
 Application de Gestion Bancaire (Soft IB)

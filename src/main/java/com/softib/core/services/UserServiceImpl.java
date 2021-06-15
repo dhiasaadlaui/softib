@@ -44,13 +44,13 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getCurrentUser() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String email = null;
+		String username = null;
 		if (principal instanceof UserDetails) {
-			email = ((UserDetails)principal).getUsername();
+			username = ((UserDetails)principal).getUsername();
 		} else {
-			email = principal.toString();
+			username = principal.toString();
 		}
-		return findUserByEmail(email);
+		return findUserByUserName(username);
 	}
 
 	@Override
@@ -60,6 +60,12 @@ public class UserServiceImpl implements IUserService {
 		user.setIsActive(false);
 		user.setActivationKey(Utility.generateActivationKey());
 		return userRepository.save(user);
+	}
+
+	@Override
+	public User findUserByUserName(String username) {
+		User user = userRepository.findUserByUsername(username);
+		return user;
 	}
 
 }

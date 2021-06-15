@@ -24,13 +24,13 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-		com.softib.core.entities.User user = userService.findUserByEmail(username);
+		com.softib.core.entities.User user = userService.findUserByUserName(username);
 		   if (user == null ) {
 	        	throw new UsernameNotFoundException("user not found");
 	        }
 		   List<GrantedAuthority> authorities = new ArrayList<>();
 	       authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
 	}
 
 }

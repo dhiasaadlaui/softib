@@ -43,6 +43,7 @@ public class SoftIbApplication {
 	        return args -> {
 	            Stream.of(Role.values()).forEach(role -> {
 	                User user = new User();
+	                user.setUsername(role.toString().toLowerCase());
 	                user.setEmail(role.toString().toLowerCase()+"@gmail.com");
 	                user.setPassword(role.toString().toLowerCase());
 	                user.setRole(role);
