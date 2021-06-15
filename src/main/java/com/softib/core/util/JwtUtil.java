@@ -8,6 +8,8 @@ import java.util.function.Function;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.softib.core.entities.codes.Role;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -38,8 +40,9 @@ public class JwtUtil {
 	private Boolean isTokenExpired(String token) {
 		return extractExpiration(token).before(new Date());
 	}
-	public String generateToken(UserDetails userDetails) {
+	public String generateToken(UserDetails userDetails, Role role) {
 		Map<String,Object> claims = new HashMap<>();
+		claims.put("role", role.name());
 		return createToken(claims, userDetails.getUsername());
 	}
 	

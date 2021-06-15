@@ -57,7 +57,8 @@ public class RestControllerUser {
 			throw new  Exception("incorrect username and password",e);
 		}
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authentificationRequest.getUsername());
-		final String jwt = jwtTokenUtil.generateToken(userDetails);
+		User user = userService.findUserByUserName(authentificationRequest.getUsername());
+		final String jwt = jwtTokenUtil.generateToken(userDetails,user.getRole());
 		return new AuthentificationResponse(jwt);
 	}
 	
