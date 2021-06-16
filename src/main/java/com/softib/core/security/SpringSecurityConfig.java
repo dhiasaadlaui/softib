@@ -33,16 +33,16 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-        .antMatchers("/api/rest/auth",
-        			"/api/rest/register",
-        			"/api/rest/v2/api-docs",
-        			"/api/rest//configuration/**",
-        			"/api/rest/swagger*/**",
-        			"/api/rest/swagger-resources/**",
-        			"/api/rest/configuration/security",
-        			"/api/rest/swagger-ui.html",
-        			"/api/rest/webjars/**").permitAll()
-        .and().authorizeRequests().antMatchers("/api/rest/users").hasAnyAuthority("ADMIN")
+        .antMatchers("/auth",
+        			"/register",
+        			"/v2/api-docs",
+        			"/configuration/**",
+        			"/swagger*/**",
+        			"/swagger-resources/**",
+        			"/configuration/security",
+        			"/swagger-ui.html",
+        			"/webjars/**").permitAll()
+        .and().authorizeRequests().antMatchers("/users").hasAnyAuthority("ADMIN")
         .anyRequest().authenticated()
         .and().sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();    

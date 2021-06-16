@@ -4,6 +4,12 @@ services:
     image: eureka:1.0
     ports:
       - 8761:8761
+  zuul:
+    image: zuul:1.0
+    ports:
+      - 8862:8862
+    depends_on:
+      - eureka
   soft-ib-core:
     image: soft-ib-core:1.0
     ports:
