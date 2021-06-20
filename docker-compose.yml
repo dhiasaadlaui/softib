@@ -27,7 +27,7 @@ services:
   soft-ib-account-manager:
     image: soft-ib-account-manager:1.0
     ports:
-      - 8086:8083
+      - 8087:8083
     depends_on:
       db_accountManager:
         condition: service_healthy
