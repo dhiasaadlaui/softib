@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softib.core.entities.AuthentificationRequest;
 import com.softib.core.entities.AuthentificationResponse;
 import com.softib.core.entities.User;
+import com.softib.core.entities.UserActivationRequest;
 import com.softib.core.security.MyUserDetailsService;
 import com.softib.core.services.IUserService;
 import com.softib.core.util.JwtUtil;
@@ -66,6 +68,22 @@ public class RestControllerUser {
 	@ResponseBody
 	public User register(@RequestBody User user) {
 		return userService.registerNewUserAccount(user);
+	}
+	
+	@GetMapping(value="users/{username}")
+	public User getUserByUsername(@PathVariable String username) {
+		return userService.findUserByUserName(username);
+	}
+	
+	@PostMapping(value = "users/get-activation-key")
+	public void getActivationKey() {
+		this.userService.getActivationKey();
+	}
+	
+	
+	@PostMapping(value = "users/activate")
+	public void activateUser(UserActivationRequest request) {
+		this.userService.activateUser(request.getKey());;
 	}
 	
 }
