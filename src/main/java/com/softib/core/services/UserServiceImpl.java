@@ -91,9 +91,9 @@ public class UserServiceImpl implements IUserService {
 		
         SimpleMailMessage message = new SimpleMailMessage(); 
         message.setFrom("noreply@baeldung.com");
-        message.setTo("dhiasaadlaui@gmail.com"); 
+        message.setTo(user.getEmail()); 
         message.setSubject("[Soft-ib] Activation Key"); 
-        message.setText("Here is your activation key: <b>"+user.getActivationKey()+"</b>");
+        message.setText("Here is your activation key: "+user.getActivationKey());
         emailSender.send(message);
 	}
 
