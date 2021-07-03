@@ -59,7 +59,25 @@ public class User implements Serializable{
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String activationKey;
 	
+	private String agencyId;
 	
+	
+	
+	
+	public String getAgencyId() {
+		return agencyId;
+	}
+
+
+
+
+	public void setAgencyId(String agencyId) {
+		this.agencyId = agencyId;
+	}
+
+
+
+
 	@OneToMany(cascade = CascadeType.ALL)
 	List<Adress> adresses;
 	
@@ -117,20 +135,10 @@ public class User implements Serializable{
 
 
 
-
-
-
-
-
-
-
-
-
-
 	public User(int userId, String email, String username, String password, String firstName, String lastName,
 			Date dateOfBirth, String identityNumber, IdentityType identityType, Date creationDate, Date updateDate,
 			Sexe sexe, MaritalStatus maritalStatus, Nationality nationality, Role role, Boolean isActive,
-			String activationKey, List<Adress> adresses, List<Contact> contacts) {
+			String activationKey, String agencyId, List<Adress> adresses, List<Contact> contacts) {
 		super();
 		this.userId = userId;
 		this.email = email;
@@ -149,6 +157,7 @@ public class User implements Serializable{
 		this.role = role;
 		this.isActive = isActive;
 		this.activationKey = activationKey;
+		this.agencyId = agencyId;
 		this.adresses = adresses;
 		this.contacts = contacts;
 	}

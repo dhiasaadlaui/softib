@@ -13,12 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softib.core.entities.AuthentificationRequest;
 import com.softib.core.entities.AuthentificationResponse;
+import com.softib.core.entities.Report;
 import com.softib.core.entities.User;
 import com.softib.core.entities.UserActivationRequest;
 import com.softib.core.security.MyUserDetailsService;
@@ -71,19 +73,47 @@ public class RestControllerUser {
 	}
 	
 	@GetMapping(value="users/{username}")
-	public User getUserByUsername(@PathVariable String username) {
+	@ResponseBody
+	public User getUserByUsername(@PathVariable("username")  String username) {
 		return userService.findUserByUserName(username);
 	}
 	
+	@PutMapping(value="users/{username}")
+	@ResponseBody
+	public User updateUser(@RequestBody User user,@PathVariable("username") String username) {
+		User userToEdit = userService.findUserByUserName(username);
+		userToEdit = user;
+		return userService.updateUser(userToEdit);
+	}
+	
+	
+	
 	@PostMapping(value = "users/get-activation-key")
-	public void getActivationKey() {
-		this.userService.getActivationKey();
+	@ResponseBody
+	public Report getActivationKey() {
+		try {
+			this.userService.getActivationKey();
+			return new Report("Activation key sent: please check your mail");
+		} catch (Throwable t) {
+			return new Report(t.getMessage());
+		}
+		
 	}
 	
 	
 	@PostMapping(value = "users/activate")
-	public void activateUser(UserActivationRequest request) {
-		this.userService.activateUser(request.getKey());;
+	@ResponseBody
+	public Report activateUser(UserActivationRequest request) {
+		try {
+			this.userService.activateUser(request.getKey());
+			return new Report("Account successfuly activated !");
+		} catch (Throwable t) {
+			return new Report(t.getMessage());
+		}
+		
 	}
+	
+	
+	
 	
 }
