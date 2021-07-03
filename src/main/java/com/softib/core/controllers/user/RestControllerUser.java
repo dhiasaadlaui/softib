@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -103,12 +104,15 @@ public class RestControllerUser {
 	
 	@PostMapping(value = "users/activate")
 	@ResponseBody
-	public Report activateUser(UserActivationRequest request) {
+	public ResponseEntity<Report> activateUser(UserActivationRequest request) {
 		try {
 			this.userService.activateUser(request.getKey());
-			return new Report("Account successfuly activated !");
+			
+			return ResponseEntity.ok().body(new Report("Account successfuly activated !"));
+			
+
 		} catch (Throwable t) {
-			return new Report(t.getMessage());
+			return ResponseEntity.badRequest().body(new Report("Account successfuly activated !"));
 		}
 		
 	}
