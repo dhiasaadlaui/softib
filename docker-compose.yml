@@ -31,6 +31,13 @@ services:
     depends_on:
       db_accountManager:
         condition: service_healthy
+  soft-ib-dashboard:
+    image: soft-ib-dashboard:1.0
+    ports:
+      - 8088:8088
+    depends_on:
+      db_dashboard:
+        condition: service_healthy
   db_core:
     image: "mysql:5.7"
     restart: always
@@ -60,6 +67,18 @@ services:
     restart: always
     ports:
       - 3308:3306
+    environment:
+      MYSQL_DATABASE: accountManager
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 10
+  db_dashboard :
+    image: "mysql:5.7"
+    restart: always
+    ports:
+      - 3309:3306
     environment:
       MYSQL_DATABASE: accountManager
       MYSQL_ROOT_PASSWORD: root
