@@ -38,6 +38,13 @@ services:
     depends_on:
       db_dashboard:
         condition: service_healthy
+  soft-ib-loan-manager:
+    image: soft-ib-dashboard:1.0
+    ports:
+      - 8093:8093
+    depends_on:
+      db_loanManager:
+        condition: service_healthy
   db_core:
     image: "mysql:5.7"
     restart: always
