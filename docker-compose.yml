@@ -39,7 +39,7 @@ services:
       db_dashboard:
         condition: service_healthy
   soft-ib-loan-manager:
-    image: soft-ib-dashboard:1.0
+    image: soft-ib-loan-manager:1.0
     ports:
       - 8093:8093
     depends_on:
