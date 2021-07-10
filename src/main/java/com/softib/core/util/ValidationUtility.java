@@ -17,9 +17,9 @@ public class ValidationUtility {
 		if (user.getPassword() == null) {
 			throw new UserValidationException(ExceptionMessages.MANDATORY_PASSWORD);
 		}
-		if (!isValidPassword(user.getPassword())) {
-			throw new UserValidationException(ExceptionMessages.INVALID_PASSWORD_FORMAT);
-		}
+//		if (!isValidPassword(user.getPassword())) {
+//			throw new UserValidationException(ExceptionMessages.INVALID_PASSWORD_FORMAT);
+//		}
 		if (user.getEmail() == null) {
 			throw new UserValidationException(ExceptionMessages.INVALID_MAIL_FORMAT);
 		}
