@@ -79,7 +79,7 @@ public class RestControllerUser {
 		try {
 			//validationUtility.validateUser(user);
 			return ResponseEntity.ok().body(userService.registerNewUserAccount(user));
-		} catch (UserValidationException e) {
+		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(new Report(e.getMessage()));
 		}
 
