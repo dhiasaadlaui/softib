@@ -24,7 +24,7 @@ services:
     depends_on:
       db_helpCenter:
         condition: service_healthy
-  soft-ib-help-center:
+  soft-ib-push-server:
     image: softib-push-server:1.0
     ports:
       - 8788:8785
