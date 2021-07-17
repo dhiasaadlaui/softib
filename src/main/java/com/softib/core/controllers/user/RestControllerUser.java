@@ -77,7 +77,7 @@ public class RestControllerUser {
 	public ResponseEntity<Object> register(@RequestBody User user) {
 
 		try {
-			validationUtility.validateUser(user);
+			//validationUtility.validateUser(user);
 			return ResponseEntity.ok().body(userService.registerNewUserAccount(user));
 		} catch (UserValidationException e) {
 			return ResponseEntity.badRequest().body(new Report(e.getMessage()));
