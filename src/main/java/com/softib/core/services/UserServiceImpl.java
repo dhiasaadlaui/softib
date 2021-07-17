@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.softib.core.entities.User;
 import com.softib.core.repositories.UserRepository;
 import com.softib.core.util.Utility;
+import com.softib.core.util.WebSocketUtil;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -23,11 +24,12 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
-	 @Autowired
-	 private JavaMailSender emailSender;
-	
 
+	@Autowired
+	private JavaMailSender emailSender;
+
+	@Autowired
+	private WebSocketUtil websocket;
 
 	@Override
 	public User findUserByEmail(String email) {
@@ -88,23 +90,23 @@ public class UserServiceImpl implements IUserService {
 		User user = getCurrentUser();
 		user.setActivationKey(Utility.generateActivationKey());
 		userRepository.save(user);
-		
-        SimpleMailMessage message = new SimpleMailMessage(); 
-        message.setFrom("noreply@baeldung.com");
-        message.setTo(user.getEmail()); 
-        message.setSubject("[Soft-ib] Activation Key"); 
-        message.setText("Here is your activation key: "+user.getActivationKey());
-        emailSender.send(message);
+
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("noreply@baeldung.com");
+		message.setTo(user.getEmail());
+		message.setSubject("[Soft-ib] Activation Key");
+		message.setText("Here is your activation key: " + user.getActivationKey());
+		emailSender.send(message);
+		websocket.pushNotification(getCurrentUser().getUsername(), "Activation key sent to your mail: "+getCurrentUser().getEmail());
 	}
 
 	@Override
 	public void activateUser(String key) {
-	if(key.equals(getCurrentUser().getActivationKey())) {
-		getCurrentUser().setIsActive(true);
-		userRepository.save(getCurrentUser());
+		if (key.equals(getCurrentUser().getActivationKey())) {
+			getCurrentUser().setIsActive(true);
+			userRepository.save(getCurrentUser());
+			websocket.pushNotification(getCurrentUser().getUsername(), "Account successfuly activated");
+		}
 	}
-}
-	
-
 
 }

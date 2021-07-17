@@ -5,6 +5,7 @@ public interface Constants {
 	String PASSWORD_VALIDATION_PATTERN="^(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
 	String MAIL="soft.ib55@gmail.com";
 	String PASSWORD="gogogogogogogogog";
+	String PUSH_SERVER_URI="http://soft-ib-push-server:8785/push";
 
 
 }
