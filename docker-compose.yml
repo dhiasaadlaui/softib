@@ -1,60 +1,11 @@
 version: "3.7"
 services:
-  eureka:
-    image: eureka:1.0
-    ports:
-      - 8761:8761
-  zuul:
-    image: zuul:1.0
-    ports:
-      - 8862:8862
-    depends_on:
-      - eureka
   soft-ib-core:
     image: soft-ib-core:1.0
     ports:
       - 8085:8081
     depends_on:
       db_core:
-        condition: service_healthy
-  soft-ib-help-center:
-    image: soft-ib-help-center:1.0
-    ports:
-      - 8086:8083
-    depends_on:
-      db_helpCenter:
-        condition: service_healthy
-  soft-ib-push-server:
-    image: softib-push-server:1.0
-    ports:
-      - 8788:8785
-  soft-ib-account-manager:
-    image: soft-ib-account-manager:1.0
-    ports:
-      - 8087:8083
-    depends_on:
-      db_accountManager:
-        condition: service_healthy
-  soft-ib-dashboard:
-    image: soft-ib-dashboard:1.0
-    ports:
-      - 8088:8088
-    depends_on:
-      db_dashboard:
-        condition: service_healthy
-  soft-ib-loan-manager:
-    image: soft-ib-loan-manager:1.0
-    ports:
-      - 8093:8093
-    depends_on:
-      db_loanManager:
-        condition: service_healthy
-  soft-ib-transaction-manager:
-    image: soft-ib-transaction-manager:1.0
-    ports:
-      - 8095:8095
-    depends_on:
-      db_transactionManager:
         condition: service_healthy
   db_core:
     image: "mysql:5.7"
@@ -68,65 +19,3 @@ services:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 5s
       retries: 10
-  db_helpCenter :
-    image: "mysql:5.7"
-    restart: always
-    ports:
-      - 3307:3306
-    environment:
-      MYSQL_DATABASE: accountManager
-      MYSQL_ROOT_PASSWORD: root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-  db_accountManager :
-    image: "mysql:5.7"
-    restart: always
-    ports:
-      - 3308:3306
-    environment:
-      MYSQL_DATABASE: accountManager
-      MYSQL_ROOT_PASSWORD: root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-  db_dashboard :
-    image: "mysql:5.7"
-    restart: always
-    ports:
-      - 3309:3306
-    environment:
-      MYSQL_DATABASE: accountManager
-      MYSQL_ROOT_PASSWORD: root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-  db_loanManager :
-    image: "mysql:5.7"
-    restart: always
-    ports:
-      - 3315:3306
-    environment:
-      MYSQL_DATABASE: loanManager
-      MYSQL_ROOT_PASSWORD: root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-  db_transactionManager :
-    image: "mysql:5.7"
-    restart: always
-    ports:
-      - 3320:3306
-    environment:
-      MYSQL_DATABASE: transactionManager
-      MYSQL_ROOT_PASSWORD: root
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-
-
